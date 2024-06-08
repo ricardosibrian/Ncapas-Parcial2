@@ -24,7 +24,7 @@ public class HistorialServiceImpl implements HistorialService {
     public void CreateHistorial(User user, CreateHistorialDTO info) {
 
             Historial historial = new Historial();
-            historial.setDescripcion(info.getDescripcion());
+            historial.setReason(info.getDescripcion());
             historial.setUser(user);
             historialRepository.save(historial);
     }

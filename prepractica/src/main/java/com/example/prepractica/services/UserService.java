@@ -17,7 +17,7 @@ public interface UserService{
 
     boolean correctPassword(User user, String password);
 
-    void registerUser(RegisterDTO info, Date fechaNacMapped);
+    void registerUser(RegisterDTO info);
 
     Date validDate (String fechaNac);
 

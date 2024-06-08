@@ -23,12 +23,19 @@ public class User implements UserDetails {
 
     private String username;
     private String email;
-    private Date fechaNac;
     private String password;
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Historial> historiales;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Token> tokens;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<CitaMedica> citas;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -38,10 +45,6 @@ public class User implements UserDetails {
     )
     @JsonIgnore
     private List<Rol> roles;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<Token> tokens;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

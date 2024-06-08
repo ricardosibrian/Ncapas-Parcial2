@@ -6,7 +6,6 @@ import com.example.prepractica.domain.entities.CitaMedica;
 import com.example.prepractica.domain.entities.Rol;
 import com.example.prepractica.domain.entities.User;
 import com.example.prepractica.repositories.CitaMedicaRepository;
-import com.example.prepractica.repositories.UserRepository;
 import com.example.prepractica.services.CitaMedicaService;
 import com.example.prepractica.services.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -36,9 +36,11 @@ public class CitaMedicaServiceImpl implements CitaMedicaService {
     public void CreateCitaMedica(CreateCitaMedicaDTO info, User user) {
 
         CitaMedica citaMedica = new CitaMedica();
+
+        citaMedica.setApplicationDate(Date.from(Instant.now()));
+        citaMedica.setReason(info.getReason());
+        citaMedica.setState("Pendiente de aprobacion");
         citaMedica.setUser(user);
-        citaMedica.setTitulo(info.getTitulo());
-        citaMedica.setDescripcion(info.getDescripcion());
 
         citaMedicaRepository.save(citaMedica);
     }
@@ -49,7 +51,7 @@ public class CitaMedicaServiceImpl implements CitaMedicaService {
                 .findAll()
                 .stream()
                 .filter(citaMedica -> citaMedica.getUser().getEmail().equals(user.getEmail()))
-                .filter(citaMedica -> citaMedica.getTitulo().equals(tittle))
+                .filter(citaMedica -> citaMedica.getReason().equals(tittle))
                 .collect(Collectors.toList());
     }
 

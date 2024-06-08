@@ -13,7 +13,7 @@ public class Historial {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID historialId;
 
-    private String descripcion;
+    private String reason;
 
     @ManyToOne
     @JoinColumn(name = "fk_user")

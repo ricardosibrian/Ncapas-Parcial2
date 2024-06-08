@@ -22,12 +22,12 @@ public class PrepracticaApplication {
     @Bean
     public CommandLineRunner commandLineRunnerRol(RolRepository rolRepository, UserService userService, UserRepository userRepository) {
         return args -> {
-            Rol existRole = rolRepository.findById("AA11").orElse(null);
+            Rol existRole = rolRepository.findById("ADMI").orElse(null);
 
             if (existRole == null) {
                 Rol rol = new Rol();
-                rol.setRolId("AA11");
-                rol.setRol("SYSADMIN");
+                rol.setRolId("ADMI");
+                rol.setRol("ADMIN");
                 rolRepository.save(rol);
 
             User user = userRepository.findByUsernameOrEmail("admin@admin.com","admin@admin.com")

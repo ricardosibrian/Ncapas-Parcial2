@@ -7,8 +7,5 @@ import lombok.Data;
 public class CreateCitaMedicaDTO {
 
     @NotBlank
-    private String titulo;
-
-    @NotBlank
-    private String descripcion;
+    private String reason;
 }

@@ -68,15 +68,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(rollbackOn = Exception.class)
-    public void registerUser(RegisterDTO info, Date fechaNacMapped) {
+    public void registerUser(RegisterDTO info) {
 
         User user = new User();
 
-        List<Rol> roles = findRolesByIdentifier(List.of("AA15"));
+        List<Rol> roles = findRolesByIdentifier(List.of("USER"));
 
         user.setUsername(info.getUsername());
         user.setEmail(info.getEmail());
-        user.setFechaNac(fechaNacMapped);
         user.setPassword(info.getPassword());
         user.setRoles(roles);
 
@@ -162,7 +161,7 @@ public class UserServiceImpl implements UserService {
     public void createDefaultUser(String name, String userEmail, String password) {
         User user = new User();
 
-        List<Rol> roles = findRolesByIdentifier(List.of("AA11"));
+        List<Rol> roles = findRolesByIdentifier(List.of("ADMI"));
 
         user.setUsername(name);
         user.setEmail(userEmail);

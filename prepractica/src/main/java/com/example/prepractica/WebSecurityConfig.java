@@ -66,10 +66,23 @@ public class WebSecurityConfig {
         // Deshabilita CSRF (Es una vulnerabilidad)
 
         // Route filter
+        http.authorizeHttpRequests(auth ->auth
+                .requestMatchers("/api/auth/**")
+                .permitAll()
+        );
+
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/test/**").hasRole("SYSADMIN")
-                .requestMatchers("/api/auth/**", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
-                .anyRequest().authenticated()
+                .requestMatchers(HttpMethod.POST,"/test/appointment/request")
+                .authenticated()
+                .requestMatchers("/test/appointment/approve").hasRole("ASSISTANT")
+                .requestMatchers("/test/appointment/owner").hasRole("PATIENT")
+                .requestMatchers("/test/clinic/schedule").hasRole("DOCTOR")
+                .requestMatchers("/test/clinic/prescriptions/**").hasRole("DOCTOR")
+                .requestMatchers("/test/config/user-role").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST,"/test/user/record").hasAnyRole("DOCTOR", "ASSISTANT")
+                .requestMatchers(HttpMethod.GET, "/test/user/record").hasRole("PATIENT")
+                .requestMatchers("/test/clinic/prescriptions/").hasRole("DOCTOR")
+                .requestMatchers("/test/appointment/finish").hasRole("DOCTOR")
         );
 
         //Statelessness

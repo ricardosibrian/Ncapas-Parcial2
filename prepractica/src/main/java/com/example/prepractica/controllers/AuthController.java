@@ -34,13 +34,7 @@ public class AuthController {
             return GeneralResponse.getResponse(HttpStatus.CONFLICT, "User already exist");
         }
 
-        Date fechaNacMapped = userService.validDate(info.getFechaNac());
-
-        if (fechaNacMapped == null) {
-            return GeneralResponse.getResponse(HttpStatus.BAD_REQUEST, "Invalid date format that must be yyyy-MM-dd");
-        }
-
-        userService.registerUser(info, fechaNacMapped);
+        userService.registerUser(info);
 
         return GeneralResponse.getResponse(HttpStatus.OK, "Register successful");
     }
