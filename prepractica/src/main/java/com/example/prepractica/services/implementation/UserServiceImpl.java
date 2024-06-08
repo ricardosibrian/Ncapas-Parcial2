@@ -173,11 +173,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void agregarRol(User user, Rol rol) {
-        if (!user.getRoles().contains(rol)) {
-            user.getRoles().add(rol);
 
-            userRepository.save(user);
+        if (user.getRoles().contains(rol)) {
+            user.getRoles().remove(rol); // Eliminar el rol si ya existe
+        } else {
+            user.getRoles().add(rol); // Agregar el rol si no existe
         }
+
+        userRepository.save(user); // Guardar el usuario actualizado en ambos casos
     }
 
     @Override

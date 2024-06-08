@@ -1,6 +1,7 @@
 package com.example.prepractica.services;
 
 import com.example.prepractica.domain.dtos.CitaMedica.CreateCitaMedicaDTO;
+import com.example.prepractica.domain.dtos.CitaMedica.ObtainAppointmentsDTO;
 import com.example.prepractica.domain.dtos.CitaMedica.ResponseAppointmentDTO;
 import com.example.prepractica.domain.dtos.User.RegisterDTO;
 import com.example.prepractica.domain.entities.CitaMedica;
@@ -17,4 +18,6 @@ public interface CitaMedicaService {
     CitaMedica GetCitaMedicaByUUID(UUID id);
 
     List<CitaMedica> getAllCitasMedicas();
+
+    List<ObtainAppointmentsDTO> getByUser(User user);
 }

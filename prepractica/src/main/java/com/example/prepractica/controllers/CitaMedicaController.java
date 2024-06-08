@@ -1,6 +1,8 @@
 package com.example.prepractica.controllers;
 
 import com.example.prepractica.domain.dtos.CitaMedica.CreateCitaMedicaDTO;
+import com.example.prepractica.domain.dtos.CitaMedica.FindByStateDTO;
+import com.example.prepractica.domain.dtos.CitaMedica.ObtainAppointmentsDTO;
 import com.example.prepractica.domain.dtos.CitaMedica.ResponseAppointmentDTO;
 import com.example.prepractica.domain.dtos.GeneralResponse;
 import com.example.prepractica.domain.dtos.User.RegisterDTO;
@@ -47,5 +49,16 @@ public class CitaMedicaController {
         return GeneralResponse.getResponse(HttpStatus.OK, citaMedica);
     }
 
+    @GetMapping("/own")
+    public ResponseEntity<GeneralResponse> getAllCitasMedicasOwn() {
+        User user = userService.findUserAuthenticated();
 
+        List<ObtainAppointmentsDTO> citasMedicas = citaMedicaService.getByUser(user);
+
+        if(citasMedicas.isEmpty()){
+            return GeneralResponse.getResponse(HttpStatus.NO_CONTENT, "No Cita Medica found");
+        }
+
+        return GeneralResponse.getResponse(HttpStatus.OK, citasMedicas);
+    }
 }

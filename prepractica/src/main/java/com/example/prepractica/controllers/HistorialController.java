@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/historial")
+@RequestMapping("/user")
 public class HistorialController {
 
     @Autowired
@@ -28,18 +28,18 @@ public class HistorialController {
     @Autowired
     private UserService userService;
 
-    /*@PostMapping("/create")
+    @PostMapping("/record")
     public ResponseEntity<GeneralResponse> createHistorial (@RequestBody @Valid CreateHistorialDTO info){
 
-        User user = userService.getUserByUUID(info.getFk_user());
+        User user = historialService.findUserByIdentifier(info.getIdentifier());
 
         if (user != null) {
             historialService.CreateHistorial(user, info);
         }
         else {
-            return GeneralResponse.getResponse(HttpStatus.NOT_FOUND, "Invalid FK user");
+            return GeneralResponse.getResponse(HttpStatus.NOT_FOUND, "User not found");
         }
 
         return GeneralResponse.getResponse(HttpStatus.OK, "Create Historial successful");
-    }*/
+    }
 }

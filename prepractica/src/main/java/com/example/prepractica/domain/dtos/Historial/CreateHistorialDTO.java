@@ -4,14 +4,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.util.UUID;
-
 @Data
 public class CreateHistorialDTO {
 
     @NotBlank
-    private String descripcion;
+    private String reason;
 
     @NotNull
-    private UUID fk_user;
+    private String identifier;
 }

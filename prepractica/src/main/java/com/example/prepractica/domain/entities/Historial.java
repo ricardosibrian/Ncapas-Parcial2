@@ -3,6 +3,7 @@ package com.example.prepractica.domain.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -14,6 +15,7 @@ public class Historial {
     private UUID historialId;
 
     private String reason;
+    private Date fecha;
 
     @ManyToOne
     @JoinColumn(name = "fk_user")
