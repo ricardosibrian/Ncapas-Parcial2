@@ -35,7 +35,6 @@ public interface UserService{
 
     User findUserAuthenticated();
 
-    List<Rol> rolesByUser(User user);
     void createDefaultUser(String username, String userEmail, String password);
 
     void agregarRol(User user, Rol rol);

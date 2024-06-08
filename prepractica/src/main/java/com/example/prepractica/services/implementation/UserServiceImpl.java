@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
 
         User user = new User();
 
-        List<Rol> roles = findRolesByIdentifier(List.of("AA13"));
+        List<Rol> roles = findRolesByIdentifier(List.of("AA15"));
 
         user.setUsername(info.getUsername());
         user.setEmail(info.getEmail());
@@ -159,11 +159,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Rol> rolesByUser(User user) {
-        return List.of();
-    }
-
-    @Override
     public void createDefaultUser(String name, String userEmail, String password) {
         User user = new User();
 
@@ -179,11 +174,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void agregarRol(User user, Rol rol) {
-        // Agregar el rol al usuario si aún no lo tiene
         if (!user.getRoles().contains(rol)) {
             user.getRoles().add(rol);
 
-            // Guardar el usuario actualizado en la base de datos
             userRepository.save(user);
         }
     }

@@ -16,13 +16,18 @@ public class CitaMedica {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID citaMedicaId;
 
+    private String titulo;
+    private String descripcion;
+    private String state;
+
     private Date fechaHoraInicio;
     private Date fechaHoraFin;
 
-    private String descripcion;
 
     @OneToMany(mappedBy = "citaMedica")
     @JsonIgnore
     private List<Prescripcion> prescripciones;
 
+    @ManyToOne(optional = false)
+    private User user;
 }

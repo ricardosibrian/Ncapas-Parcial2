@@ -5,10 +5,9 @@ import lombok.Data;
 
 @Data
 public class CreateCitaMedicaDTO {
-    @NotBlank
-    private String fechaHoraInicio;
 
-    private String fechaHoraFin;
+    @NotBlank
+    private String titulo;
 
     @NotBlank
     private String descripcion;
