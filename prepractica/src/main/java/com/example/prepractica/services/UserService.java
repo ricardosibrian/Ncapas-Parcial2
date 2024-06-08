@@ -1,5 +1,6 @@
 package com.example.prepractica.services;
 
+import com.example.prepractica.domain.dtos.User.AddRolDTO;
 import com.example.prepractica.domain.dtos.User.RegisterDTO;
 import com.example.prepractica.domain.entities.Rol;
 import com.example.prepractica.domain.entities.Token;
@@ -22,6 +23,8 @@ public interface UserService{
 
     List<User> getAllUsers();
 
+    Rol findRoleByIdentifier(String rolId);
+
     // Security
 
     // Token Management
@@ -34,4 +37,6 @@ public interface UserService{
 
     List<Rol> rolesByUser(User user);
     void createDefaultUser(String username, String userEmail, String password);
+
+    void agregarRol(User user, Rol rol);
 }

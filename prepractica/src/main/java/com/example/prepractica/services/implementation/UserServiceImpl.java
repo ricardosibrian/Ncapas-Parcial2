@@ -1,5 +1,6 @@
 package com.example.prepractica.services.implementation;
 
+import com.example.prepractica.domain.dtos.User.AddRolDTO;
 import com.example.prepractica.domain.dtos.User.RegisterDTO;
 import com.example.prepractica.domain.entities.Rol;
 import com.example.prepractica.domain.entities.Token;
@@ -18,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -175,6 +177,18 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public void agregarRol(User user, Rol rol) {
+        // Agregar el rol al usuario si aún no lo tiene
+        if (!user.getRoles().contains(rol)) {
+            user.getRoles().add(rol);
+
+            // Guardar el usuario actualizado en la base de datos
+            userRepository.save(user);
+        }
+    }
+
+    @Override
     public Rol findRoleByIdentifier(String rolId) {
         return rolRepository
                 .findById(rolId)
