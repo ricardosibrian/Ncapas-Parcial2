@@ -14,13 +14,7 @@ public interface CitaMedicaService {
 
     void CreateCitaMedica(CreateCitaMedicaDTO info, User user);
 
-    List<CitaMedica> findByUserAndTittle(User user, String tittle);
-
     CitaMedica GetCitaMedicaByUUID(UUID id);
 
-    Date validFechaHoraInicio (String fechaHoraInicio);
-
     List<CitaMedica> getAllCitasMedicas();
-
-    void ResponseAppointment(List<CitaMedica> appointments, ResponseAppointmentDTO info, User user);
 }

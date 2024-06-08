@@ -66,11 +66,6 @@ public class WebSecurityConfig {
         // Deshabilita CSRF (Es una vulnerabilidad)
 
         // Route filter
-        http.authorizeHttpRequests(auth ->auth
-                .requestMatchers("/api/auth/**")
-                .permitAll()
-        );
-
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.POST,"/test/appointment/request")
                 .authenticated()
@@ -83,6 +78,13 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/test/user/record").hasRole("PATIENT")
                 .requestMatchers("/test/clinic/prescriptions/").hasRole("DOCTOR")
                 .requestMatchers("/test/appointment/finish").hasRole("DOCTOR")
+        );
+
+        http.authorizeHttpRequests(auth ->auth
+                .requestMatchers("/api/auth/**")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
         );
 
         //Statelessness

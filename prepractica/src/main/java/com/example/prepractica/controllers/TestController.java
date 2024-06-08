@@ -51,7 +51,7 @@ public class TestController {
         return GeneralResponse.getResponse(HttpStatus.OK, "Tienes permiso");
     }
 
-    @PostMapping("/clinic/prescriptions/")
+    @PostMapping("/clinic/prescriptions")
     public ResponseEntity<GeneralResponse> presCriptions (){
 
         return GeneralResponse.getResponse(HttpStatus.OK, "Tienes permiso");

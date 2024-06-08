@@ -19,15 +19,17 @@ public class CitaMedica {
     private Date applicationDate;
     private Date realizationDate;
     private Date endDate;
+    private Date estimateEndDate;
 
     private String reason;
     private String state;
-    private String minutesAppointment;
 
     @OneToMany(mappedBy = "citaMedica")
     @JsonIgnore
     private List<Prescripcion> prescripciones;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
+    @JoinColumn(name = "fk_user")
     private User user;
+
 }

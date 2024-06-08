@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/citaMedica")
+@RequestMapping("/appointment")
 public class CitaMedicaController {
 
     private final CitaMedicaService citaMedicaService;
@@ -29,7 +29,7 @@ public class CitaMedicaController {
         this.userService = userService;
     }
 
-    @PostMapping("/create")
+    @PostMapping("/request")
     public ResponseEntity<GeneralResponse> createCitaMedica (@RequestBody @Valid CreateCitaMedicaDTO info){
 
         User user = userService.findUserAuthenticated();
@@ -47,24 +47,5 @@ public class CitaMedicaController {
         return GeneralResponse.getResponse(HttpStatus.OK, citaMedica);
     }
 
-    @PatchMapping("/confirmAppointment/{userEmail}")
-    public ResponseEntity<GeneralResponse> confirmAppointment (@PathVariable String userEmail, @RequestBody ResponseAppointmentDTO info) {
-
-        User isUser = userService.findUserByIdentifier(userEmail);
-
-        if (isUser == null) {
-            return GeneralResponse.getResponse(HttpStatus.BAD_REQUEST, "User not found");
-        }
-
-        List<CitaMedica> haveAppointment = citaMedicaService.findByUserAndTittle(isUser, info.getTitulo());
-
-        if (haveAppointment == null) {
-            return GeneralResponse.getResponse(HttpStatus.BAD_REQUEST, "Appointment not found");
-        }
-
-        citaMedicaService.ResponseAppointment(haveAppointment, info, isUser);
-
-        return GeneralResponse.getResponse(HttpStatus.OK, "Appointment confirmation successful");
-    }
 
 }

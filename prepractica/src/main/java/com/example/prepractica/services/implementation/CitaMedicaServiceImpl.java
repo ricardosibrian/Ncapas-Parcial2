@@ -46,16 +46,6 @@ public class CitaMedicaServiceImpl implements CitaMedicaService {
     }
 
     @Override
-    public List<CitaMedica> findByUserAndTittle(User user, String tittle) {
-        return citaMedicaRepository
-                .findAll()
-                .stream()
-                .filter(citaMedica -> citaMedica.getUser().getEmail().equals(user.getEmail()))
-                .filter(citaMedica -> citaMedica.getReason().equals(tittle))
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public CitaMedica GetCitaMedicaByUUID(UUID id) {
         return citaMedicaRepository
                 .findById(id)
@@ -63,31 +53,8 @@ public class CitaMedicaServiceImpl implements CitaMedicaService {
     }
 
     @Override
-    public Date validFechaHoraInicio(String fechaHoraInicio) {
-        try {
-            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(fechaHoraInicio);
-        } catch (ParseException ex) {
-            return null;
-        }
-    }
-
-    @Override
     public List<CitaMedica> getAllCitasMedicas() {
         return citaMedicaRepository.findAll();
     }
 
-    @Override
-    public void ResponseAppointment(List<CitaMedica> appointments, ResponseAppointmentDTO info, User user) {
-
-        appointments.forEach(appointment -> {
-            appointment.setState(info.getState());
-            citaMedicaRepository.save(appointment);
-        });
-
-        if (info.getState().equals("Accepted")) {
-            Rol newrol = userService.findRoleByIdentifier("AA14");
-
-            userService.agregarRol(user, newrol);
-        }
-    }
 }
